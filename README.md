@@ -1,2 +1,2 @@
 # MSDA-Demo
-A quick demo for MSDA project
+A quick demo for MSDA project.
