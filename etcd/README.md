@@ -73,6 +73,7 @@ As the demo uses NGINX Plus a `nginx-repo.crt` and `nginx-repo.key` needs to be 
     `$ ./etcd_exec_watch_bigip.sh &`
 
 9. To watch the change in etcd, execute the follow command.
+
     `$ watch -d etcdctl --no-sync --endpoint http://$HOST_IP:4001 ls --recursive /http`
 
 10. Spin up the nginxdemos/hello container which is the backend http service
