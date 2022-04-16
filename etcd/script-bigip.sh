@@ -15,6 +15,7 @@ OPTIONS='-s'
 ETCD_KEYS_API="http://$HOST_IP:4001/v2/keys"
 ETCD_MACHINES_API="http://$HOST_IP:4001/v2/machines"
 
+# Change the username and password of BIG-IP API access
 BIGIPPOST="$CURL -sk -u restfulapi:murgiw-goxzam-seNka9 -X POST https://${BIGIP}"
 BIGIPDELETE="$CURL -sk -u restfulapi:murgiw-goxzam-seNka9 -X DELETE https://${BIGIP}"
 BIGIPGET="$CURL -sk -u restfulapi:murgiw-goxzam-seNka9 -X GET https://${BIGIP}"
