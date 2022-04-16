@@ -107,5 +107,7 @@ As the demo uses NGINX Plus a `nginx-repo.crt` and `nginx-repo.key` needs to be 
 4.  The way this works is everytime there is a change in etcd, script.sh gets triggered (through etcd_exec_watch.sh) which checks for some of the environment variables set by etcd and adds the server specified by ETCD_WATCH_VALUE to the NGINX upstream block if ETCD_WATCH_ACTION is 'set' and removes it if ETCD_WATCH_ACTION is 'delete'. The removal happens by traversing through all NGINX Plus upstreams and removing the ones not present in etcd.
 
 All the changes should be automatically reflected in the NGINX config and show up on the NGINX Plus Dashboard.
+
 All the changes should be automatically reflected in the F5 BIG-IP config and show up on the F5 BIG-IP Dashboard.
+
 All the changes should be shown up in `watch -d etcdctl` terminal. 
