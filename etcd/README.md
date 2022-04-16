@@ -56,7 +56,7 @@ As the demo uses NGINX Plus a `nginx-repo.crt` and `nginx-repo.key` needs to be 
 
     2.  If you are using Docker for Mac, the IP address you need to use is 127.0.0.1
 
-    **Export this IP into an environment variable named HOST_IP by running `export HOST_IP=x.x.x.x` command. This variable is used by docker-compose.yml file**
+    **Export this IP into an environment variable named HOST_IP by running `export HOST_IP=x.x.x.x` command. This variable is used by docker-compose.yml file.**
     
     **Export F5 BIG-IP IP address into an envoronment variable named BIGIP by runn `export BIGIP=y.y.y.y` command.**
 
