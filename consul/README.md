@@ -1,4 +1,4 @@
-# Demo to show F5 service discovery with Consul
+# Demos to show F5 service discovery with Consul
 
 These project include 4 demos shows F5 products being used in conjuction with Consul, a service discovery platform. 
 
