@@ -1,0 +1,10 @@
+version: '3'
+services:
+  http:
+    image: nginxdemos/hello:latest
+    labels:
+      consul: "nginx-plus"
+      SERVICE_80_NAME: http
+      SERVICE_TAGS: production
+    ports:
+      - "80"
