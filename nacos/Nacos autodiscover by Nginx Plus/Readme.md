@@ -34,6 +34,6 @@ nginx_upstream	upstream name	"nacos-service"
 
 4. Use curl to create a service with IP:port and make this service as permanet.
 
-` curl -X POST 'http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=service1&ip=192.168.5.31&port=80&ephemeral=true'
+`curl -X POST 'http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=service1&ip=192.168.5.31&port=80&ephemeral=true'`
 
 5. Check the upstream www1 via dashboard to see if the 192.168.5.31:80 is discovered automatically or not.
