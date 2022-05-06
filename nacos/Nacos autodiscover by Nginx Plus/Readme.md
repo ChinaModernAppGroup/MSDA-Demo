@@ -34,7 +34,9 @@ nacos_service_name = "service1"
 | nginx_config |	config path |	"/etc/nginx/nginx.conf" |
 | nginx_upstream |	upstream name |	"nacos-service" |
 
-3. sh nacos-nginx-template-0.6.1/bin/startup.sh
+3. Use below command to startup the program to monitor Nacos
+
+`sh nacos-nginx-template-0.6.1/bin/startup.sh`
 
 4. Use curl to create a service with IP:port and make this service as permanet.
 
