@@ -191,3 +191,6 @@ eureka heartbeat success
 retrieved full registry successfully
 
 ```
+
+# Follow up the instructions for MSDA-eureka to install the msda-eureka rpm package into a BIG-IP unit, and then try to deploy an application LX with the template.
+
