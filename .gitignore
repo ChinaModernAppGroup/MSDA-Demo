@@ -1,8 +1,8 @@
-.DS_Store
-.idea
-.key
-.crt
-.pem
+*.DS_Store
+*.idea
+*.key
+*.crt
+*.pem
 
 build
 BUILD
