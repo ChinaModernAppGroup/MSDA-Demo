@@ -4,7 +4,7 @@
 
 run eureka server as a docker container.
 
-`docker run -p 8761:8761 springcloud/eureka -d`
+`docker run --name eureka -p 8761:8761 -d springcloud/eureka`
 
 check the container is running.
 

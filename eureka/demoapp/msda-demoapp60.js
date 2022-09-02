@@ -1,5 +1,5 @@
 const Eureka = require('eureka-js-client').Eureka;
-const eurekaServer = '10.1.10.40';
+const eurekaServer = "127.0.0.1";
 
 const eureka = new Eureka({
     instance: {

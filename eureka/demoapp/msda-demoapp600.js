@@ -1,11 +1,11 @@
 const Eureka = require('eureka-js-client').Eureka;
-const eurekaServer = '10.1.10.40';
+const eurekaServer = '127.0.0.1';
 
 const eureka = new Eureka({
     instance: {
         app: 'msda-demo-service',
-        hostName: 'centos42',
-        ipAddr: '10.1.10.42',
+        hostName: 'centos43',
+        ipAddr: '10.1.10.43',
         statusPageUrl: 'http://localhost:8080',
         port: {
             '$': 8080,
