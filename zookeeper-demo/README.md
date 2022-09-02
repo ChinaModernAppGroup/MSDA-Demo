@@ -1,4 +1,4 @@
-# [Ping Xiong on Sep/2/2022, just borrow this demo from https://github.com/nginxinc/NGINX-Demos for zookeeper environment.]
+# [Just borrow this demo from https://github.com/nginxinc/NGINX-Demos for zookeeper environment. Ping Xiong on Sep/2/2022]
 
 # Demo to show NGINX Plus Dynamic Reconfiguration API with Zookeeper
 
