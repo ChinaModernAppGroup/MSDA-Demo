@@ -4,8 +4,8 @@ const eurekaServer = '10.1.10.40';
 const eureka = new Eureka({
     instance: {
         app: 'msda-demo-service',
-        hostName: 'centos41',
-        ipAddr: '10.1.10.41',
+        hostName: 'centos42',
+        ipAddr: '10.1.10.42',
         statusPageUrl: 'http://localhost:8080',
         port: {
             '$': 8080,
@@ -28,7 +28,7 @@ eureka.start(function(error){
     console.log(error || 'complete');
 });
 
-var timeout = 600 * 1000;
+var timeout = 300 * 1000;
 setTimeout(function(){
     console.log('timed out!');
     eureka.stop(function(error){
