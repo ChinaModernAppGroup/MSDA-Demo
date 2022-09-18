@@ -46,3 +46,28 @@ Open the Nacos console in your browser
 
 link：[local nacos server](http://127.0.0.1:8848/nacos/)
 
+
+1. Export environment variable for NACOS server
+
+`export NACOS_IP=10.108.44.57`
+
+2. Run register script to register some instances
+
+```
+$ ./register_instance.sh 10.1.10.40
+10.1.10.40
+endPoint 10.1.10.40 add: ok
+$ ./register_instance.sh 10.1.10.41
+10.1.10.41
+endPoint 10.1.10.41 add: ok
+```
+3. Check the deployed application in BIG-IP, confirm it follows the change in NACOS server.
+4. Run script to deregister some instance
+
+```
+$ ./deregister_instance.sh 10.1.10.40
+10.1.10.40
+endPoint 10.1.10.40 add: ok
+
+```
+5. Check the deployed application in BIG-IP, confirm it follows the change in NACOS server.
