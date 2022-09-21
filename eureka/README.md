@@ -97,21 +97,21 @@ Make sure to change the IP address of eureka server into your server address.
 
 # Start application client, you will see it registered into eureka server
 
-`node mada-demoapp0.sh &`
-`node mada-demoapp1.sh &`
-`node mada-demoapp2.sh &`
+`node mada-demoapp600.sh &`
+`node mada-demoapp300.sh &`
+`node mada-demoapp120.sh &`
 
 ```
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# node msda-demoapp1.js &
+root@ubuntu:~/MSDA-Demo/eureka/demoapp# node msda-demoapp600.js &
 [1] 84213
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# registered with eureka:  msda-demo-service/centos41
 retrieved full registry successfully
 complete
 
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# node msda-demoapp2.js &
+root@ubuntu:~/MSDA-Demo/eureka/demoapp# node msda-demoapp300.js &
 [2] 84260
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# registered with eureka:  msda-demo-service/centos42
