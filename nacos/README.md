@@ -78,18 +78,36 @@ nacos-1.nacos-headless.default.svc.cluster.local:8848
 nacos-2.nacos-headless.default.svc.cluster.local:8848
 ubuntu@k8smaster:~/nacos-k8s$ 
 
-
 ```
 
 # Test MSDA-nacos for BIG-IP
 
 1. Export environment variable for NACOS server, for example:
 
+```
+ubuntu@k8smaster:~$ 
+ubuntu@k8smaster:~$ cd MSDA-Demo/nacos/
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ 
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ ls -l
+total 28
+drwxrwxr-x 2 ubuntu ubuntu 4096 Sep 18 07:24 'Nacos autodiscover by Nginx Plus'
+-rw-rw-r-- 1 ubuntu ubuntu 1258 Sep 18 07:24  README.md
+-rw-rw-r-- 1 ubuntu ubuntu  302 Sep 18 07:24  batch_deregister_instances.sh
+-rw-rw-r-- 1 ubuntu ubuntu  313 Sep 18 07:24  batch_register_instances.sh
+-rwxrwxr-x 1 ubuntu ubuntu  668 Sep 18 08:23  deregister_instance.sh
+-rwxrwxr-x 1 ubuntu ubuntu  668 Sep 18 08:22  register_instance.sh
+-rwxrwxr-x 1 ubuntu ubuntu  301 Sep 18 08:42  watchInstances.sh
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ 
+
+```
+Define NACOS_IP variable.
+
 `export NACOS_IP=10.108.44.57`
 
 2. Run register script to register some instances
 
 ```
+
 $ ./register_instance.sh 10.1.10.40
 10.1.10.40
 endPoint 10.1.10.40 add: ok
