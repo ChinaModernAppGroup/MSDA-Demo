@@ -37,4 +37,4 @@ ubuntu@k8smaster:~$
 
 # Deploy a MSDA-K8S applications LX
 
-Follow up the instructions to deploy a MSDA-K8S applications LX via WebUI of API.
+Follow up the instructions to deploy a MSDA-K8S applications LX via WebUI or API.
