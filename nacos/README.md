@@ -4,8 +4,7 @@ Follow up the offical doc to setup the nacos server in docker environment.
 
 [nacos-docker](https://nacos.io/zh-cn/docs/quick-start-docker.html)
 
-## Quick Start for Nacos Docker
-
+## Option 1: Quick Start for Nacos Docker, setup a standalone instance for nacos
 ### Steps
 
 Run the following command：
@@ -46,6 +45,42 @@ Open the Nacos console in your browser
 
 link：[local nacos server](http://127.0.0.1:8848/nacos/)
 
+## Option2: Quickstart for nacos-k8s, setup a nacos cluster for demo.
+### Quick Start
+	• Clone Project
+git clone https://github.com/nacos-group/nacos-k8s.git
+	• Simple Start
+If you want to start Nacos without NFS, but emptyDirs will possibly result in a loss of data. as follows:
+```
+cd nacos-k8s
+chmod +x quick-startup.sh
+./quick-startup.sh
+
+ubuntu@k8smaster:~/nacos-k8s$ 
+ubuntu@k8smaster:~/nacos-k8s$ for i in 0 1 2; do echo nacos-$i; kubectl exec nacos-$i cat conf/cluster.conf; done
+nacos-0
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+#2022-09-21T14:52:38.056
+nacos-0.nacos-headless.default.svc.cluster.local:8848
+nacos-1.nacos-headless.default.svc.cluster.local:8848
+nacos-2.nacos-headless.default.svc.cluster.local:8848
+nacos-1
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+#2022-09-21T14:52:37.639
+nacos-0.nacos-headless.default.svc.cluster.local:8848
+nacos-1.nacos-headless.default.svc.cluster.local:8848
+nacos-2.nacos-headless.default.svc.cluster.local:8848
+nacos-2
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+#2022-09-21T14:52:38.743
+nacos-0.nacos-headless.default.svc.cluster.local:8848
+nacos-1.nacos-headless.default.svc.cluster.local:8848
+nacos-2.nacos-headless.default.svc.cluster.local:8848
+ubuntu@k8smaster:~/nacos-k8s$ 
+
+
+```
+
 # Test MSDA-nacos for BIG-IP
 
 1. Export environment variable for NACOS server, for example:
@@ -61,6 +96,15 @@ endPoint 10.1.10.40 add: ok
 $ ./register_instance.sh 10.1.10.41
 10.1.10.41
 endPoint 10.1.10.41 add: ok
+
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ 
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ ./watchInstances.sh 
+      "instanceId": "10.1.10.40#8080#DEFAULT#DEFAULT_GROUP@@msda.nacos.com",
+      "instanceId": "10.1.10.41#8080#DEFAULT#DEFAULT_GROUP@@msda.nacos.com",
+      "instanceId": "10.1.10.42#8080#DEFAULT#DEFAULT_GROUP@@msda.nacos.com",
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ 
+
+
 ```
 3. Check the deployed application in BIG-IP, confirm it follows the change in NACOS server.
 4. Run script to deregister some instance
@@ -69,6 +113,15 @@ endPoint 10.1.10.41 add: ok
 $ ./deregister_instance.sh 10.1.10.40
 10.1.10.40
 endPoint 10.1.10.40 add: ok
+
+
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ 
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ ./watchInstances.sh 
+      "instanceId": "10.1.10.44#8080#DEFAULT#DEFAULT_GROUP@@msda.nacos.com",
+      "instanceId": "10.1.10.43#8080#DEFAULT#DEFAULT_GROUP@@msda.nacos.com",
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ 
+ubuntu@k8smaster:~/MSDA-Demo/nacos$ 
+
 
 ```
 5. Check the deployed application in BIG-IP, confirm it follows the change in NACOS server.
