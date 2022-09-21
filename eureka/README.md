@@ -50,7 +50,7 @@ demoapp@ /root/MSDA-Demo/eureka/demoapp
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 ```
-Create couple applications use this template:
+Create couple of applications use this template:
 
 ```
 const Eureka = require('eureka-js-client').Eureka;
@@ -97,9 +97,9 @@ Make sure to change the IP address of eureka server into your server address.
 
 # Start application client, you will see it registered into eureka server
 
-`node mada-demoapp600.sh &`
-`node mada-demoapp300.sh &`
-`node mada-demoapp120.sh &`
+`node mada-demoapp600.js &`
+`node mada-demoapp300.js &`
+`node mada-demoapp120.js &`
 
 ```
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
@@ -124,7 +124,8 @@ root@ubuntu:~/MSDA-Demo/eureka/demoapp# curl -s -X GET http://localhost:8761/eur
 <applications>
   <versions__delta>1</versions__delta>
   <apps__hashcode></apps__hashcode>
-</applications>root@ubuntu:~/MSDA-Demo/eureka/demoapp# curl -s -X GET http://localhost:8761/eureka/apps/msda-demo-service
+</applications>
+root@ubuntu:~/MSDA-Demo/eureka/demoapp# curl -s -X GET http://localhost:8761/eureka/apps/msda-demo-service
 <application>
   <name>MSDA-DEMO-SERVICE</name>
   <instance>
@@ -194,3 +195,22 @@ retrieved full registry successfully
 
 # Follow up the instructions for MSDA-eureka to install the msda-eureka rpm package into a BIG-IP unit, and then try to deploy an application LX with the template.
 
+# clean up the docker container after finish the demo
+
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker ps 
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker ps -a 
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                        PORTS     NAMES
+ffab4a6c3194   springcloud/eureka   "java -jar /app.jar …"   29 minutes ago   Exited (130) 35 seconds ago             wonderful_heisenberg
+7984174af653   hello-world          "/hello"                 3 days ago       Exited (0) 3 days ago                   interesting_albattani
+0bc847ad5581   hello-world          "/hello"                 3 days ago       Exited (0) 3 days ago                   flamboyant_bhabha
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker rm ff
+ff
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker ps -a 
+CONTAINER ID   IMAGE         COMMAND    CREATED      STATUS                  PORTS     NAMES
+7984174af653   hello-world   "/hello"   3 days ago   Exited (0) 3 days ago             interesting_albattani
+0bc847ad5581   hello-world   "/hello"   3 days ago   Exited (0) 3 days ago             flamboyant_bhabha
+ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
