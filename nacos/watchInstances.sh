@@ -8,7 +8,7 @@ nacos_login="$NACOS_IP:8848/nacos/v1/auth/login"
 accessToken=$(curl -s -X POST $nacos_login -d 'username=nacos&password=nacos' | jq -c '.accessToken' | sed 's/\"//g')
 #echo $accessToken
 
-nacosAPI="http://$NACOS_IP:8848/nacos/v1/ns/instance/list?serviceName=msda.nacos.com&accessToken="
+nacosAPI="http://$NACOS_IP:8848/nacos/v1/ns/instance/list?serviceName=msda.nacos.com&accessToken=$accessToken"
 
 curl -X GET -s $nacosAPI | jq . | grep "instanceId\":"
 
