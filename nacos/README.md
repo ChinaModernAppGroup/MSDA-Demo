@@ -15,6 +15,17 @@ Clone project
 git clone https://github.com/nacos-group/nacos-docker.git
 cd nacos-docker
 ```
+
+#### Advanced Usage
+
+* Tips: You can change the version of the Nacos image in the compose file from the following configuration.
+  `example/.env`
+
+```dotenv
+NACOS_VERSION=v2.1.1
+NACOS_AUTH_ENABLE=true
+```
+
 Stand-alone Derby
 
 `docker-compose -f example/standalone-derby.yaml up`
