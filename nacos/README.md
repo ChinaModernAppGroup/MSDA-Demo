@@ -29,6 +29,45 @@ NACOS_AUTH_ENABLE=true
 Stand-alone Derby
 
 `docker-compose -f example/standalone-derby.yaml up`
+
+If you want to enable authencation, please add environment var in the yaml file, for example:
+
+```
+ubuntu@k8snode1:~/nacos-docker/example$ cat standalone-derby.yaml 
+version: "2"
+services:
+  nacos:
+    image: nacos/nacos-server:${NACOS_VERSION}
+    container_name: nacos-standalone
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - NACOS_AUTH_ENABLE=true
+    volumes:
+      - ./standalone-logs/:/home/nacos/logs
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus-standalone.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - nacos
+    restart: on-failure
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    restart: on-failure
+ubuntu@k8snode1:~/nacos-docker/example$ 
+
+```
+
 Stand-alone MySQL
 
 To use MySQL 5.7, run
