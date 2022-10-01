@@ -9,7 +9,7 @@ serviceName="msda.nacos.com"
 
 if [[ -n "$1" ]]; then
   echo "Found namespaceId:$1, will expand it to servicename"
-  serviceName="$serviceName&namespaceId=$2"
+  serviceName="$serviceName&namespaceId=$1"
 fi
 
 nacos_login="$NACOS_IP:8848/nacos/v1/auth/login"
