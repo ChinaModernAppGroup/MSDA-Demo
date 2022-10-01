@@ -7,8 +7,15 @@ if [[ -z "$NACOS_IP" ]]; then
 fi
 
 echo $1
+echo $2
 endPoint=$1
 serviceName="msda.nacos.com"
+
+if [[ -n "$2" ]]; then
+  echo "Found namespaceId:$2, will expand it to servicename"
+  serviceName="$serviceName&namespaceId=$2"
+fi
+
 nacos_login="$NACOS_IP:8848/nacos/v1/auth/login"
 
 accessToken=$(curl -s -X POST $nacos_login -d 'username=nacos&password=nacos' | jq -c '.accessToken' | sed 's/\"//g')
