@@ -30,7 +30,7 @@ Stand-alone Derby
 
 `docker-compose -f example/standalone-derby.yaml up`
 
-If you want to enable authencation, please add environment var in the yaml file, for example:
+If you want to enable authentication, please add environment var in the yaml file, for example:
 
 ```
 ubuntu@k8snode1:~/nacos-docker/example$ cat standalone-derby.yaml 
