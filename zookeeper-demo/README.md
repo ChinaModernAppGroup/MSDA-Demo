@@ -1,4 +1,4 @@
-# [Just borrow this demo from https://github.com/nginxinc/NGINX-Demos for zookeeper environment. Ping Xiong on Sep/2/2022]
+[Just borrow this demo from https://github.com/nginxinc/NGINX-Demos for zookeeper environment. Ping Xiong on Sep/2/2022]
 
 # Demo to show NGINX Plus Dynamic Reconfiguration API with Zookeeper
 
@@ -14,82 +14,6 @@ The demo is based off the work described in this blog post: [Service Discovery w
 
 ## Setup Options:
 
-### Fully automated Vagrant/Ansible setup:
-
-Install Vagrant using the necessary package for your OS:
-
-<https://www.vagrantup.com/downloads.html>
-
-1.  Install provider for vagrant to use to start VM's.
-
-    The default provider is VirtualBox (Note that only VirtualBox versions 4.0 and higher are supported), which can be downloaded from the following link:
-
-    <https://www.virtualbox.org/wiki/Downloads>
-
-     A full list of providers can be found at the following page, if you do not want to use VirtualBox:
-
-    <https://docs.vagrantup.com/v2/providers/>
-
-2.  Install Ansible:
-
-    <http://docs.ansible.com/ansible/intro_installation.html>
-
-3.  Clone demo repo
-
-    `$ git clone https://github.com/nginxinc/NGINX-Demos.git`
-
-4.  Copy `nginx-repo.key` and `nginx-repo.crt` files for your account to `~/NGINX-Demos/zookeeper-demo/nginxplus`
-
-5.  Move into the zookeeper-demo directory and start the Vagrant vm:
-
-    ```
-    $ cd ~/NGINX-Demos/zookeeper-demo
-    $ vagrant up
-    ```
-
-    The `vagrant up` command will start the virtualbox VM and provision it using the ansible playbook file `~/NGINX-Demos/zookeeper-demo/setup_zookeeper_demo.yml`. The ansible playbook file also invokes another script provision.sh which sets the HOST_IP environment variable to the IP address of the eth1 interface (10.2.2.70 in this case assigned in the Vagrantfile) and invokes the `docker-compose up -d` command
-
-6.  SSH into the newly created virtual machine and move into the /vagrant directory which contains the demo files:
-
-    ```
-    $ vagrant ssh
-    $ sudo su
-    ```
-
-    The demo files will be in `/srv/NGINX-Demos/zookeeper-demo`
-
-7.  Now simply follow the steps listed under section 'Running the demo'.
-
-### Ansible only deployment
-
-1.  Create Ubuntu 18.04 LTS VM
-
-2.  Install Ansible on Ubuntu VM
-
-    `$ sudo apt-get install ansible`
-
-3.  Clone demo repo into `/srv` on Ubuntu VM:
-
-    ```
-    $ cd /srv
-    $ sudo git clone https://github.com/nginxinc/NGINX-Demos.git
-    ```
-
-4.  Copy `nginx-repo.key` and `nginx-repo.crt` files for your account to `/srv/NGINX-Demos/zookeeper-demo/nginxplus`
-
-5.  Move into zookeeper-demo directory and set the HOST_IP environment variable to the public IP of your ubuntu VM
-
-    ```
-    $ cd /srv/NGINX-Demos/zookeeper-demo
-    $ export HOST_IP=x.x.x.x
-    ```
-
-6.  Run the ansible playbook against localhost on Ubuntu VM:
-
-    `$ sudo ansible-playbook -i "localhost," -c local /srv/NGINX-Demos/zookeeper-demo/setup_zookeeper_demo.yml`
-
-7.  Now simply follow the steps listed under section 'Running the demo'.
-
 ### Manual Install
 
 #### Prerequisites and Required Software
@@ -104,13 +28,13 @@ As the demo uses NGINX Plus a `nginx-repo.crt` and `nginx-repo.key` needs to be 
 
 1.  Clone demo repo
 
-    `$ git clone https://github.com/nginxinc/NGINX-Demos.git`
+    `$ git clone https://github.com/ChinaModernAppGroup/MSDA-Demo.git`
 
 2.  Copy `nginx-repo.key` and `nginx-repo.crt` files for your account to `~/NGINX-Demos/zookeeper-demo/nginxplus/`
 
 3.  Move into the demo directory:
 
-    `$ cd ~/NGINX-Demos/zookeeper-demo`
+    `$ cd ~/MSDA-Demo/zookeeper-demo`
 
 4.  If you have run this demo previously or have any docker containers running, start with a clean slate by running
 
@@ -172,3 +96,6 @@ As the demo uses NGINX Plus a `nginx-repo.crt` and `nginx-repo.key` needs to be 
 4.  The way this works is using [Watches](https://zookeeper.apache.org/doc/trunk/zookeeperProgrammers.html#sc_zkDataMode_watches) feature of Zookeeper, eveytime there is a change in the list of services, a handler (`script.sh`) is invoked through zk-tool. This bash script gets the list of all Nginx Plus upstreams using its status and upstream_conf APIs, loops through all the containers registered with ZK which are tagged with SERVICE_TAG "production" using 'zk-tool list /services'. and adds them to the upstream group using upstream_conf API if not present already. It also removes the upstreams from Nginx upstream group which are not present in ZK.
 
 All the changes should be automatically reflected in the NGINX config and show up on the NGINX Plus Dashboard.
+
+5. Import f5-iapplx-msda-zk rpm package into F5 BIG-IP
+6. Configure applications LX with msdazk template, check LTM pool status.

@@ -22,7 +22,7 @@ cd nacos-docker
   `example/.env`
 
 ```dotenv
-NACOS_VERSION=v2.1.1
+NACOS_VERSION=v2.0.4
 NACOS_AUTH_ENABLE=true
 ```
 
