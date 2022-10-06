@@ -3,7 +3,7 @@ const eurekaServer = "127.0.0.1";
 
 const eureka = new Eureka({
     instance: {
-        instanceId: 'msda-demo-service:centos41:10.1.10.41',
+        //instanceId: 'msda-demo-service:centos41:10.1.10.41',
         app: 'msda-demo-service',
         hostName: 'centos41',
         ipAddr: '10.1.10.41',
