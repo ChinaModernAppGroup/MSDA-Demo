@@ -134,7 +134,7 @@ ubuntu@k8smaster:~/nacos-k8s$
 
 ## Import rpm package of MSDA-nacos into BIG-IP
 
-Follow the instructions of [msda-nacos](https://github.com/ChinaModernAppGroup/msda-nacos), get the rpm package from the repo, and import it into BIG-IP.
+Follow the instructions of [msda-nacos](https://github.com/ChinaModernAppGroup/msda-nacos), download the rpm package from the repo, and import it into BIG-IP.
 
 ## Start the demo
 
