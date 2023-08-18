@@ -1,6 +1,6 @@
 # Import the MSDA-K8S rpm package
 
-Follow the instructions to import the MSDA-K8S rpm package into BIG-IP.
+Follow the instructions in [msda-k8s](https://github.com/ChinaModernAppGroup/msda-k8s) to import the MSDA-K8S rpm package into BIG-IP.
 
 # Get the base64 format certificate for authentication
 
@@ -37,4 +37,11 @@ ubuntu@k8smaster:~$
 
 # Deploy a MSDA-K8S applications LX
 
-Follow up the instructions to deploy a MSDA-K8S applications LX via WebUI or API.
+In BIG-IP WebUI, select iApp --> Application Services: Application LX 
+
+Create new Applications LX with select template msda-k8s.
+
+
+
+
+
