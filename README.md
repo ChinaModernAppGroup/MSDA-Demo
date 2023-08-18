@@ -5,7 +5,10 @@ A quick demo for MSDA project.
 
 A project to develop an agent(MSDA, MicroService Discovery Agent) for BIG-IP/NGINX to enable service discovery of distributed and Microservices applications. 
 
-1. Develop iApps LX template and iControl LX API for BIG-IP 
+1. Develop iApps LX template and iControl LX API for BIG-IP
+
+Please download iApp LX rpm packages from the [MSDA project repo](https://github.com/ChinaModernAppGroup).
+
 2. Develop agent or module for NGINX 
 3. Develop Containerized agent for VELOS 
 
@@ -13,4 +16,4 @@ A project to develop an agent(MSDA, MicroService Discovery Agent) for BIG-IP/NGI
 
 To demo service discovery for NGINX upstream and BIG-IP pool member.
 
-Update on Apr/14th/2022 23:35 by XP.
+Update on Aug/18th/2023 by XP.
