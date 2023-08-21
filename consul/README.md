@@ -56,14 +56,14 @@
    $ docker-compose -f create-http-service.yml scale http=5
    $ docker-compose -f create-http-service.yml scale http=3
    ```
-   
-   8. 观察pool member和Consul的变化，所有的变化的应该能正确反映到pool中
+
+8. 观察pool member和Consul的变化，所有的变化的应该能正确反映到pool中
 
 ## 使用API配置
 
 1. iApp的API Endpoint是/mgmt/shared/iapp/blocks，首先使用GET方法获取blocks，在items中有一个state为TEMPLATE，name为msdaconsul的就是我们导入的iApp模板，复制它的selfLink，大概是这样的"https://localhost/mgmt/shared/iapp/blocks/53b47d4e-5c7c-3f42-93a3-fc34626f15be"
 
-2. 对/mgmt/shared/iapp/blocks使用POST方法，创建一个新的App，Payload使用下面的模板，将其中的name、consul endpoints等参数替换，本例中这些参数和GUI上的一样，除了健康检查改成了http：
+2. 对/mgmt/shared/iapp/blocks使用POST方法，创建一个新的App，Payload使用下面的模板，将其中的name、consul endpoints等参数替换，特别要注意："baseReference"要改成上一步查到的那个链接
    
    ```json
    {
