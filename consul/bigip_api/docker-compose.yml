@@ -3,7 +3,7 @@ services:
   consul:
     labels:
       consul: "bigip"
-    command: "-server -bootstrap -node consul -advertise ${HOST_IP} -config-file /etc/consul.d/config.json"
+    command: "-server -bootstrap -node consul -advertise ${HOST_IP}"
     image: progrium/consul:latest
     container_name: consul
     ports:
@@ -11,9 +11,6 @@ services:
       - "8400:8400"
       - "8500:8500"
       - "8600:53/udp"
-    volumes:
-      - "./consul_watches_config.json:/etc/consul.d/config.json"
-      - "./script_bigip.sh:/tmp/script.sh"
     environment:
       - HOST_IP
   registrator:
