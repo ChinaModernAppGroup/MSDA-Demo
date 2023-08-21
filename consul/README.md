@@ -57,6 +57,145 @@
    $ docker-compose -f create-http-service.yml scale http=3
    ```
    
- 8. 观察pool member和Consul的变化，所有的变化的应该能正确反映到pool中
- 
- ## 使用API配置
+   8. 观察pool member和Consul的变化，所有的变化的应该能正确反映到pool中
+
+## 使用API配置
+
+1. iApp的API Endpoint是/mgmt/shared/iapp/blocks，首先使用GET方法获取blocks，在items中有一个state为TEMPLATE，name为msdaconsul的就是我们导入的iApp模板，复制它的selfLink，大概是这样的"https://localhost/mgmt/shared/iapp/blocks/53b47d4e-5c7c-3f42-93a3-fc34626f15be"
+
+2. 对/mgmt/shared/iapp/blocks使用POST方法，创建一个新的App，Payload使用下面的模板，将其中的name、consul endpoints等参数替换，本例中这些参数和GUI上的一样，除了健康检查改成了http：
+   
+   ```json
+   {
+     "name": "web_api",
+     "inputProperties": [
+       {
+         "id": "consulEndpoint",
+         "type": "STRING",
+         "value": "http://10.1.10.227:8500",
+         "metaData": {
+           "description": "consul endpoint list",
+           "displayName": "consul endpoints",
+           "isRequired": true
+         }
+       },
+       {
+          "id": "consulToken",
+          "type": "STRING",
+          "value": "",
+          "metaData": {
+              "description": "Access token for consul resource",
+              "displayName": "X-Consul-Token",
+              "isRequired": false
+          }
+       },
+       {
+          "id": "nameSpace",
+          "type": "STRING",
+          "value": "",
+          "metaData": {
+              "description": "Namespace for consul enterprise",
+              "displayName": "Namespace",
+              "isRequired": false
+          }
+       },
+       {
+         "id": "serviceName",
+         "type": "STRING",
+         "value": "http",
+         "metaData": {
+           "description": "Service name to be exposed",
+           "displayName": "Service Name in registry",
+           "isRequired": true
+         }
+       },
+       {
+         "id": "poolName",
+         "type": "STRING",
+         "value": "/Common/consulSamplePool_api",
+         "metaData": {
+           "description": "Pool Name to be created",
+           "displayName": "BIG-IP Pool Name",
+           "isRequired": true
+         }
+       },
+       {
+         "id": "poolType",
+         "type": "STRING",
+         "value": "round-robin",
+         "metaData": {
+           "description": "load-balancing-mode",
+           "displayName": "Load Balancing Mode",
+           "isRequired": true,
+           "uiType": "dropdown",
+           "uiHints": {
+             "list": {
+               "dataList": [
+                 "round-robin",
+                 "least-connections-member",
+                 "least-connections-node"
+               ]
+             }
+           }
+         }
+       },
+       {
+         "id": "healthMonitor",
+         "type": "STRING",
+         "value": "http",
+         "metaData": {
+           "description": "Health Monitor",
+           "displayName": "Health Monitor",
+           "isRequired": true,
+           "uiType": "dropdown",
+           "uiHints": {
+             "list": {
+               "dataList": [
+                 "tcp",
+                 "udp",
+                 "http",
+                 "none"
+               ]
+             }
+           }
+         }
+       }
+     ],
+     "dataProperties": [
+       {
+         "id": "pollInterval",
+         "type": "NUMBER",
+         "value": 30,
+         "metaData": {
+           "description": "Interval of polling from BIG-IP to registry, 30s by default.",
+           "displayName": "Polling Invertal",
+           "isRequired": false
+         }
+       }
+     ],
+     "configurationProcessorReference": {
+       "link": "https://localhost/mgmt/shared/iapp/processors/msdaconsulConfig"
+     },
+     "auditProcessorReference": {
+       "link": "https://localhost/mgmt/shared/iapp/processors/msdaconsulEnforceConfiguredAudit"
+     },
+     "audit": {
+       "intervalSeconds": 60,
+       "policy": "ENFORCE_CONFIGURED"
+     },
+     "configProcessorTimeoutSeconds": 30,
+     "statsProcessorTimeoutSeconds": 15,
+     "configProcessorAffinity": {
+       "processorPolicy": "LOAD_BALANCED",
+       "affinityProcessorReference": {
+         "link": "https://localhost/mgmt/shared/iapp/processors/affinity/load-balanced"
+       }
+     },
+     "state": "BINDING",
+     "baseReference": {
+                   "link": "https://localhost/mgmt/shared/iapp/blocks/53b47d4e-5c7c-3f42-93a3-fc34626f15be"
+     }
+   }
+   ```
+
+3. 提交POST后，应该能在GUI上看到新建的App和Pool
