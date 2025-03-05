@@ -1,4 +1,8 @@
-# Prepare springCloud eureka server
+# MSDA-eureka demo
+
+## Prepare springCloud eureka server
+
+If you already have a eureka server, you can skip this step.
 
 `docker pull springcloud/eureka`
 
@@ -21,13 +25,22 @@ root@ubuntu:~/MSDA-Demo/eureka/demoapp# curl -s -X GET http://localhost:8761/eur
   <apps__hashcode></apps__hashcode>
 </applications>root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-
+ubuntu@k8snode1:~/MSDA-Demo/eureka$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka$ curl -s -H "Accept: application/json" -X GET http://localhost:8761/eureka/apps | jq
+{
+  "applications": {
+    "versions__delta": 1,
+    "apps__hashcode": ""
+  }
+}
+ubuntu@k8snode1:~/MSDA-Demo/eureka$ 
 
 ```
+
 You can also verify with web browser: http://localhost:8761/ .
 
 
-# Prepare application with eureka client
+## Prepare application with eureka client
 
 make sure you have node.js installed.
 
@@ -95,122 +108,327 @@ setTimeout(function(){
 
 Make sure to change the IP address of eureka server into your server address.
 
-# Start application client, you will see it registered into eureka server
+## Start application client, you will see it registered into eureka server
 
 `node mada-demoapp600.js &`
 `node mada-demoapp300.js &`
 `node mada-demoapp120.js &`
 
-```
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# node msda-demoapp600.js &
-[1] 84213
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# registered with eureka:  msda-demo-service/centos41
+```bash
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ node msda-demoapp600.js &
+[1] 6739
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ registered with eureka:  msda-demo-service/centos43
 retrieved full registry successfully
 complete
 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# node msda-demoapp300.js &
-[2] 84260
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# registered with eureka:  msda-demo-service/centos42
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ node msda-demoapp300.js &
+[2] 6755
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ registered with eureka:  msda-demo-service/centos42
 retrieved full registry successfully
 complete
 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# curl -s -X GET http://localhost:8761/eureka/apps
-<applications>
-  <versions__delta>1</versions__delta>
-  <apps__hashcode></apps__hashcode>
-</applications>
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# curl -s -X GET http://localhost:8761/eureka/apps/msda-demo-service
-<application>
-  <name>MSDA-DEMO-SERVICE</name>
-  <instance>
-    <hostName>centos41</hostName>
-    <app>MSDA-DEMO-SERVICE</app>
-    <ipAddr>10.1.10.41</ipAddr>
-    <status>UP</status>
-    <overriddenstatus>UNKNOWN</overriddenstatus>
-    <port enabled="true">8080</port>
-    <securePort enabled="false">7002</securePort>
-    <countryId>1</countryId>
-    <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
-      <name>MyOwn</name>
-    </dataCenterInfo>
-    <leaseInfo>
-      <renewalIntervalInSecs>30</renewalIntervalInSecs>
-      <durationInSecs>90</durationInSecs>
-      <registrationTimestamp>1651761834240</registrationTimestamp>
-      <lastRenewalTimestamp>1651761834240</lastRenewalTimestamp>
-      <evictionTimestamp>0</evictionTimestamp>
-      <serviceUpTimestamp>1651761834095</serviceUpTimestamp>
-    </leaseInfo>
-    <metadata class="java.util.Collections$EmptyMap"/>
-    <statusPageUrl>http://localhost:8080</statusPageUrl>
-    <vipAddress>localhost</vipAddress>
-    <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
-    <lastUpdatedTimestamp>1651761834240</lastUpdatedTimestamp>
-    <lastDirtyTimestamp>1651761834094</lastDirtyTimestamp>
-    <actionType>ADDED</actionType>
-  </instance>
-  <instance>
-    <hostName>centos42</hostName>
-    <app>MSDA-DEMO-SERVICE</app>
-    <ipAddr>10.1.10.42</ipAddr>
-    <status>UP</status>
-    <overriddenstatus>UNKNOWN</overriddenstatus>
-    <port enabled="true">8080</port>
-    <securePort enabled="false">7002</securePort>
-    <countryId>1</countryId>
-    <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
-      <name>MyOwn</name>
-    </dataCenterInfo>
-    <leaseInfo>
-      <renewalIntervalInSecs>30</renewalIntervalInSecs>
-      <durationInSecs>90</durationInSecs>
-      <registrationTimestamp>1651761840742</registrationTimestamp>
-      <lastRenewalTimestamp>1651761840742</lastRenewalTimestamp>
-      <evictionTimestamp>0</evictionTimestamp>
-      <serviceUpTimestamp>1651761840541</serviceUpTimestamp>
-    </leaseInfo>
-    <metadata class="java.util.Collections$EmptyMap"/>
-    <statusPageUrl>http://localhost:8080</statusPageUrl>
-    <vipAddress>localhost</vipAddress>
-    <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
-    <lastUpdatedTimestamp>1651761840743</lastUpdatedTimestamp>
-    <lastDirtyTimestamp>1651761840541</lastDirtyTimestamp>
-    <actionType>ADDED</actionType>
-  </instance>
-</application>root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
-root@ubuntu:~/MSDA-Demo/eureka/demoapp# eureka heartbeat success
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ node msda-demoapp120.js &
+[3] 6766
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ registered with eureka:  msda-demo-service/msda-demo-service:centos41:10.1.10.41
 retrieved full registry successfully
+complete
+
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ curl -s -H "Accept: application/json" -X GET http://localhost:8761/eureka/apps | jq
+{
+  "applications": {
+    "versions__delta": 1,
+    "apps__hashcode": "UP_1_",
+    "application": {
+      "name": "MSDA-DEMO-SERVICE",
+      "instance": {
+        "hostName": "centos43",
+        "app": "MSDA-DEMO-SERVICE",
+        "ipAddr": "10.1.10.43",
+        "status": "UP",
+        "overriddenstatus": "UNKNOWN",
+        "port": {
+          "@enabled": "true",
+          "$": "8080"
+        },
+        "securePort": {
+          "@enabled": "false",
+          "$": "7002"
+        },
+        "countryId": 1,
+        "dataCenterInfo": {
+          "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+          "name": "MyOwn"
+        },
+        "leaseInfo": {
+          "renewalIntervalInSecs": 30,
+          "durationInSecs": 90,
+          "registrationTimestamp": 1741183285997,
+          "lastRenewalTimestamp": 1741183285997,
+          "evictionTimestamp": 0,
+          "serviceUpTimestamp": 1741183285522
+        },
+        "metadata": {
+          "@class": "java.util.Collections$EmptyMap"
+        },
+        "statusPageUrl": "http://localhost:8080",
+        "vipAddress": "localhost",
+        "isCoordinatingDiscoveryServer": false,
+        "lastUpdatedTimestamp": 1741183285998,
+        "lastDirtyTimestamp": 1741183285519,
+        "actionType": "ADDED"
+      }
+    }
+  }
+}
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ retrieved full registry successfully
+eureka heartbeat success
 eureka heartbeat success
 retrieved full registry successfully
 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ curl -s -H "Accept: application/json" -X GET http://localhost:8761/eureka/apps/msda-demo-service | jq
+{
+  "application": {
+    "name": "MSDA-DEMO-SERVICE",
+    "instance": [
+      {
+        "hostName": "centos41",
+        "app": "MSDA-DEMO-SERVICE",
+        "ipAddr": "10.1.10.41",
+        "status": "UP",
+        "overriddenstatus": "UNKNOWN",
+        "port": {
+          "@enabled": "true",
+          "$": "8080"
+        },
+        "securePort": {
+          "@enabled": "false",
+          "$": "7002"
+        },
+        "countryId": 1,
+        "dataCenterInfo": {
+          "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+          "name": "MyOwn"
+        },
+        "leaseInfo": {
+          "renewalIntervalInSecs": 30,
+          "durationInSecs": 90,
+          "registrationTimestamp": 1741183463316,
+          "lastRenewalTimestamp": 1741183463316,
+          "evictionTimestamp": 0,
+          "serviceUpTimestamp": 1741183305311
+        },
+        "metadata": {
+          "@class": "java.util.Collections$EmptyMap"
+        },
+        "statusPageUrl": "http://localhost:8080",
+        "vipAddress": "localhost",
+        "isCoordinatingDiscoveryServer": false,
+        "lastUpdatedTimestamp": 1741183463316,
+        "lastDirtyTimestamp": 1741183463187,
+        "actionType": "ADDED"
+      },
+      {
+        "hostName": "centos42",
+        "app": "MSDA-DEMO-SERVICE",
+        "ipAddr": "10.1.10.42",
+        "status": "UP",
+        "overriddenstatus": "UNKNOWN",
+        "port": {
+          "@enabled": "true",
+          "$": "8080"
+        },
+        "securePort": {
+          "@enabled": "false",
+          "$": "7002"
+        },
+        "countryId": 1,
+        "dataCenterInfo": {
+          "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+          "name": "MyOwn"
+        },
+        "leaseInfo": {
+          "renewalIntervalInSecs": 30,
+          "durationInSecs": 90,
+          "registrationTimestamp": 1741183291260,
+          "lastRenewalTimestamp": 1741183531390,
+          "evictionTimestamp": 0,
+          "serviceUpTimestamp": 1741183290822
+        },
+        "metadata": {
+          "@class": "java.util.Collections$EmptyMap"
+        },
+        "statusPageUrl": "http://localhost:8080",
+        "vipAddress": "localhost",
+        "isCoordinatingDiscoveryServer": false,
+        "lastUpdatedTimestamp": 1741183291260,
+        "lastDirtyTimestamp": 1741183290821,
+        "actionType": "ADDED"
+      },
+      {
+        "hostName": "centos43",
+        "app": "MSDA-DEMO-SERVICE",
+        "ipAddr": "10.1.10.43",
+        "status": "UP",
+        "overriddenstatus": "UNKNOWN",
+        "port": {
+          "@enabled": "true",
+          "$": "8080"
+        },
+        "securePort": {
+          "@enabled": "false",
+          "$": "7002"
+        },
+        "countryId": 1,
+        "dataCenterInfo": {
+          "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+          "name": "MyOwn"
+        },
+        "leaseInfo": {
+          "renewalIntervalInSecs": 30,
+          "durationInSecs": 90,
+          "registrationTimestamp": 1741183285997,
+          "lastRenewalTimestamp": 1741183555899,
+          "evictionTimestamp": 0,
+          "serviceUpTimestamp": 1741183285522
+        },
+        "metadata": {
+          "@class": "java.util.Collections$EmptyMap"
+        },
+        "statusPageUrl": "http://localhost:8080",
+        "vipAddress": "localhost",
+        "isCoordinatingDiscoveryServer": false,
+        "lastUpdatedTimestamp": 1741183285998,
+        "lastDirtyTimestamp": 1741183285519,
+        "actionType": "ADDED"
+      }
+    ]
+  }
+}
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+
 ```
 
-# Follow up the instructions for MSDA-eureka to install the msda-eureka rpm package into a BIG-IP unit, and then try to deploy an application LX with the template.
+## Install the msda-eureka rpm package into a BIG-IP unit
 
-# clean up the docker container after finish the demo
+Follow up the instructions for [MSDA-eureka](https://github.com/ChinaModernAppGroup/msda-eureka) to install the [msda-eureka rpm package](https://github.com/ChinaModernAppGroup/msda-eureka/releases) into a BIG-IP unit, and then try to deploy an application LX with the template.
 
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker ps 
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker ps -a 
-CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                        PORTS     NAMES
-ffab4a6c3194   springcloud/eureka   "java -jar /app.jar …"   29 minutes ago   Exited (130) 35 seconds ago             wonderful_heisenberg
-7984174af653   hello-world          "/hello"                 3 days ago       Exited (0) 3 days ago                   interesting_albattani
-0bc847ad5581   hello-world          "/hello"                 3 days ago       Exited (0) 3 days ago                   flamboyant_bhabha
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker rm ff
-ff
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ docker ps -a 
-CONTAINER ID   IMAGE         COMMAND    CREATED      STATUS                  PORTS     NAMES
-7984174af653   hello-world   "/hello"   3 days ago   Exited (0) 3 days ago             interesting_albattani
-0bc847ad5581   hello-world   "/hello"   3 days ago   Exited (0) 3 days ago             flamboyant_bhabha
-ubuntu@k8smaster:~/MSDA-Demo/eureka/demoapp$ 
+Goto iApps >> Application Services >> create a new iAppLX application.
+
+For example:
+
+![msda-eureka-demo4](./images/msda-eureka-demo.png)
+
+Make sure the Applications LX is deployed successfully.
+![msda-eureka-deployed](./images/deployed.png)
+
+## Repeat to start the demoapp to register into eureka server
+
+`node msda-demoapp600.js &`
+`node mada-demoapp300.js &`
+`node mada-demoapp120.js &`
+
+
+## Verify the pool member configured in the BIG-IP unit
+
+```bash
+
+root@(bigip1)(cfg-sync Standalone)(Active)(/Common)(tmos)# list ltm pool eurekaSamplePool
+ltm pool eurekaSamplePool {
+    members {
+        10.1.10.41:8080 {
+            address 10.1.10.41
+        }
+        10.1.10.42:8080 {
+            address 10.1.10.42
+        }
+        10.1.10.43:8080 {
+            address 10.1.10.43
+        }
+    }
+}
+root@(bigip1)(cfg-sync Standalone)(Active)(/Common)(tmos)# 
+root@(bigip1)(cfg-sync Standalone)(Active)(/Common)(tmos)# 
+```
+
+## Wait for a while, then you will see the some member deregistered from the eureka server and the bigip pool also follows the change
+
+```bash
+
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ curl -s -H "Accept: application/json" -X GET http://localhost:8761/eureka/apps/msda-demo-service | jq
+{
+  "application": {
+    "name": "MSDA-DEMO-SERVICE",
+    "instance": {
+      "hostName": "centos43",
+      "app": "MSDA-DEMO-SERVICE",
+      "ipAddr": "10.1.10.43",
+      "status": "UP",
+      "overriddenstatus": "UNKNOWN",
+      "port": {
+        "@enabled": "true",
+        "$": "8080"
+      },
+      "securePort": {
+        "@enabled": "false",
+        "$": "7002"
+      },
+      "countryId": 1,
+      "dataCenterInfo": {
+        "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+        "name": "MyOwn"
+      },
+      "leaseInfo": {
+        "renewalIntervalInSecs": 30,
+        "durationInSecs": 90,
+        "registrationTimestamp": 1741184155598,
+        "lastRenewalTimestamp": 1741184546234,
+        "evictionTimestamp": 0,
+        "serviceUpTimestamp": 1741184155541
+      },
+      "metadata": {
+        "@class": "java.util.Collections$EmptyMap"
+      },
+      "statusPageUrl": "http://localhost:8080",
+      "vipAddress": "localhost",
+      "isCoordinatingDiscoveryServer": false,
+      "lastUpdatedTimestamp": 1741184155598,
+      "lastDirtyTimestamp": 1741184155540,
+      "actionType": "ADDED"
+    }
+  }
+}
+ubuntu@k8snode1:~/MSDA-Demo/eureka/demoapp$ 
+
+# In the bigip
+
+root@(bigip1)(cfg-sync Standalone)(Active)(/Common)(tmos)# 
+root@(bigip1)(cfg-sync Standalone)(Active)(/Common)(tmos)# 
+root@(bigip1)(cfg-sync Standalone)(Active)(/Common)(tmos)# list ltm pool eurekaSamplePool
+ltm pool eurekaSamplePool {
+    members {
+        10.1.10.43:8080 {
+            address 10.1.10.43
+        }
+    }
+}
+root@(bigip1)(cfg-sync Standalone)(Active)(/Common)(tmos)# 
+```
