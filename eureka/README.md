@@ -12,7 +12,7 @@ run eureka server as a docker container.
 
 check the container is running.
 
-```
+```bash
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# docker ps 
 CONTAINER ID   IMAGE                COMMAND                CREATED        STATUS        PORTS                                       NAMES
 b2758037afee   springcloud/eureka   "java -jar /app.jar"   23 hours ago   Up 12 hours   0.0.0.0:8761->8761/tcp, :::8761->8761/tcp   competent_kare
@@ -37,14 +37,13 @@ ubuntu@k8snode1:~/MSDA-Demo/eureka$
 
 ```
 
-You can also verify with web browser: http://localhost:8761/ .
-
+You can also verify with web browser: <http://localhost:8761/> .
 
 ## Prepare application with eureka client
 
 make sure you have node.js installed.
 
-```
+```bash
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# node -v 
 v16.13.1
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
@@ -54,7 +53,7 @@ Install eureka client module.
 
 `npm install eureka-js-client --save`
 
-```
+```bash
 oot@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# npm list
 demoapp@ /root/MSDA-Demo/eureka/demoapp
@@ -63,9 +62,10 @@ demoapp@ /root/MSDA-Demo/eureka/demoapp
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 root@ubuntu:~/MSDA-Demo/eureka/demoapp# 
 ```
+
 Create couple of applications use this template:
 
-```
+```bash
 const Eureka = require('eureka-js-client').Eureka;
 const eurekaServer = '10.1.10.40';
 
@@ -344,7 +344,6 @@ Make sure the Applications LX is deployed successfully.
 `node msda-demoapp600.js &`
 `node mada-demoapp300.js &`
 `node mada-demoapp120.js &`
-
 
 ## Verify the pool member configured in the BIG-IP unit
 
