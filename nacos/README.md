@@ -174,7 +174,7 @@ Define NACOS_IP variable.
 
 `export NACOS_IP=10.1.20.5`
 
-If you are in the node running the NACOS server, and no need to export the `NACOS_IP` variable.
+If you are in the node running the NACOS server, no need to export the `NACOS_IP` variable.
 
 ```bash
 
