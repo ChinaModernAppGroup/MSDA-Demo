@@ -342,7 +342,9 @@ Make sure the Applications LX is deployed successfully.
 ## Repeat to start the demoapp to register into eureka server
 
 `node msda-demoapp600.js &`
+
 `node mada-demoapp300.js &`
+
 `node mada-demoapp120.js &`
 
 ## Verify the pool member configured in the BIG-IP unit
