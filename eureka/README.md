@@ -111,7 +111,9 @@ Make sure to change the IP address of eureka server into your server address.
 ## Start application client, you will see it registered into eureka server
 
 `node mada-demoapp600.js &`
+
 `node mada-demoapp300.js &`
+
 `node mada-demoapp120.js &`
 
 ```bash
